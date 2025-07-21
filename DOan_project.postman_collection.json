@@ -1,0 +1,776 @@
+{
+	"info": {
+		"_postman_id": "8873c7d5-f303-4c6b-980b-bd1b29759f14",
+		"name": "DOan_project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3238797",
+		"_collection_link": "https://new000-6299.postman.co/workspace/Auto_API-_esting~66b22fa1-4f75-48d8-9453-3b7da69c344a/collection/3238797-8873c7d5-f303-4c6b-980b-bd1b29759f14?action=share&source=collection_link&creator=3238797"
+	},
+	"item": [
+		{
+			"name": "commonFunction",
+			"item": [
+				{
+					"name": "Dummy request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "bài 2",
+					"item": [
+						{
+							"name": "Bài 2_ý 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//Kiểm tra token có trả ra value mong muốn không - áp dụng csv với 3 biến như bảng để làm\r",
+											"let jsonData = pm.response.json()\r",
+											"let expToken = pm.variables.get(\"expectedToken\")\r",
+											"pm.test(\"Giá trị token theo email đúng\", function () {\r",
+											"    pm.expect(jsonData.token).to.equal(expToken)\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "reqres-free-v1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"email\": \"{{userlogin}}\",\r\n \"password\": \"{{pass}}\"\r\n  }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://reqres.in/api/login",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Bài 2_ý 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//Kiểm tra token có trả ra value mong muốn không - áp dụng csv với 3 biến như bảng để làm\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.globals.set(\"expToken\", \"QpwL5tke4Pnpja7X\")\r",
+											"\r",
+											"pm.test(\"Token\" + (pm.info.iteration+ 1) + \"có giá trị đúng\", function () {\r",
+											"    pm.expect(jsonData.token).to.equal(pm.globals.get(\"expToken\") + ((pm.info.iteration) + 1))\r",
+											"});\r",
+											"console.log(pm.info.iteration) // lấy số lần lặp của RUnner"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "reqres-free-v1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"email\": \"{{userlogin}}\",\r\n \"password\": \"cityslicka\"\r\n  }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://reqres.in/api/login",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Bài 2_ý 3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//Kiểm tra token có trả ra value mong muốn không - không áp dụng csv, dùng vòng lặp kết hợp mảng (interation)\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.globals.set(\"expToken\", \"QpwL5tke4Pnpja7X\")\r",
+											"\r",
+											"pm.test(\"Token\" + (pm.info.iteration+ 1) + \"có giá trị đúng\", function () {\r",
+											"    pm.expect(jsonData.token).to.equal(pm.globals.get(\"expToken\") + ((pm.info.iteration) + 1))\r",
+											"});\r",
+											"console.log(pm.info.iteration) // lấy số lần lặp của RUnner)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"let users = [\"george.bluth@reqres.in\",\"janet.weaver@reqres.in\",\"emma.wong@reqres.in\",\"eve.holt@reqres.in\", \"charles.morris@reqres.in\",\"tracey.ramos@reqres.in\" ]\r",
+											"pm.globals.set(\"userX\",users[pm.info.iteration])\r",
+											"console.log(pm.globals.get(\"userX\"))"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "reqres-free-v1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"email\": \"{{userX}}\",\r\n \"password\": \"cityslicka\"\r\n  }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://reqres.in/api/login",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Bài 1_Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Kiểm tra trong response có trả ra token\r",
+									"let jsonData = pm.response.json();\r",
+									"let ExpToken = 'QpwL5tke4Pnpja7X4';\r",
+									"pm.test(\"Token có tồn tại không\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"token\")\r",
+									"});\r",
+									"\r",
+									"//Kiểm tra trong response token khác null\r",
+									"pm.test(\"Token khác null\", function () {\r",
+									"    pm.expect(jsonData).not.to.be.empty\r",
+									"    });\r",
+									"\r",
+									"//Kiểm tra token có đúng là ‘QpwL5tke4Pnpja7X4’ hay không?\r",
+									"pm.test(\"Kiểm tra token đúng là ‘QpwL5tke4Pnpja7X4’\", function () {\r",
+									"    pm.expect(jsonData.token).to.equal(ExpToken);\r",
+									"    });\r",
+									"    //Kiểm tra token có trả ra value mong muốn không - áp dụng csv với 3 biến như bảng để làm\r",
+									"\r",
+									"    console.log(\"Test\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n\r\n  }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/login",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user management",
+			"item": [
+				{
+					"name": "get list user",
+					"item": [
+						{
+							"name": "Bài 3_ý 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json()\r",
+											"let numberEmail = jsonData.data.length\r",
+											"let eptdomain = \"reqres.in\"\r",
+											"for(let i = 0;i<= numberEmail;i++)\r",
+											"{\r",
+											"    let email = jsonData.data[i].email\r",
+											"    let index = email.indexOf(\"@\")\r",
+											"    let actdomain = email.slice(index+1)\r",
+											"   \r",
+											"pm.test(\"Domain email\" + (i+1)+ \"là đúng\", function () {\r",
+											"    pm.expect(eptdomain).to.equal(actdomain);\r",
+											"});\r",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"packages": {},
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "reqres-free-v1",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://reqres.in/api/users?page=1",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per_page",
+											"value": "2",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Bài 3_ý 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json();\r",
+											"let numberEmail = jsonData.data.length;\r",
+											"let eptdomain = \"reqres.in\";\r",
+											"for (let i = 0; i < numberEmail; i++) { // Changed <= to <\r",
+											"    let email = jsonData.data[i].email;\r",
+											"    let userEmail = email.split(\"@\")[0];\r",
+											"    let firstName = jsonData.data[i].first_name;\r",
+											"    console.log(firstName)\r",
+											"    let lastName = jsonData.data[i].last_name;\r",
+											"    let fullname = firstName + \".\" + lastName;\r",
+											"\r",
+											"    pm.test(\"User email\" + (i + 1) + \"là đúng\", function () {\r",
+											"        pm.expect(userEmail.toLowerCase()).to.equal(fullname.toLowerCase());\r",
+											"    });\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "reqres-free-v1",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://reqres.in/api/users?page=1",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per_page",
+											"value": "2",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Bài 3_ý 3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json();\r",
+											"let numberEmail = jsonData.data.length;\r",
+											"let eptdomain = \"reqres.in\";\r",
+											"for (let i = 0; i < numberEmail; i++) { // Changed <= to <\r",
+											"    let email = jsonData.data[i].email;\r",
+											"\r",
+											"    let userEmail = email.split(\"@\")[0];\r",
+											"    let fNEmail = userEmail.split(\".\")[0]\r",
+											"    let lNEmail = userEmail.split(\".\")[1]\r",
+											"\r",
+											"    let firstName = jsonData.data[i].first_name;\r",
+											"    let lastName = jsonData.data[i].last_name;\r",
+											"\r",
+											"    pm.test(\"First name\" + (i + 1) + \"là đúng\", function () {\r",
+											"        pm.expect(fNEmail.toLowerCase()).to.equal(firstName.toLowerCase());\r",
+											"    });\r",
+											"    pm.test(\"Last name\" + (i + 1) + \"là đúng\", function () {\r",
+											"        pm.expect(lNEmail.toLowerCase()).to.equal(lastName.toLowerCase());\r",
+											"    });\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "reqres-free-v1",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://reqres.in/api/users?page=1",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per_page",
+											"value": "2",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "create User",
+					"item": [
+						{
+							"name": "Bài 4 _ý 1_cách 1",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"let rdName = \"Đoan_\" + (Math.floor(Math.random()* 90000)+100000)\r",
+											"console.log(rdName)\r",
+											"let rdJob = \"Doanjob\" + (Math.floor(Math.random()* 90000)+100000)\r",
+											"pm.globals.set(\"rdName\",rdName)\r",
+											"pm.globals.set(\"rdJob\",rdJob)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "reqres-free-v1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"{{rdName}}\", // tên user - not required\r\n\"job\": \"{{rdJob}}\" // nghề nghiệp user - not required\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://reqres.in/api/users",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Bài 4 _ý 1_cách 2",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"let rdName = \"Đoan_\" + (Math.floor(Math.random()* 90000)+100000)\r",
+											"console.log(rdName)\r",
+											"let rdJob = \"Doanjob\" + (Math.floor(Math.random()* 90000)+100000)\r",
+											"pm.globals.set(\"rdName\",rdName)\r",
+											"pm.globals.set(\"rdJob\",rdJob)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "reqres-free-v1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"{{rdName}}\", // tên user - not required\r\n\"job\": \"{{rdJob}}\" // nghề nghiệp user - not required\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://reqres.in/api/users",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Bài 4 _ý 2",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"let rdName = pm.variables.replaceIn('{{$randomFullName}}')\r",
+											"let rdJob = pm.variables.replaceIn('{{$randomJobTitle}}')\r",
+											"pm.globals.set(\"rdName\",rdName)\r",
+											"pm.globals.set(\"rdJob\",rdJob)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json()\r",
+											"let actName = jsonData.name\r",
+											"let eptName = pm.globals.get(\"rdName\")\r",
+											"\r",
+											"let actJob = jsonData.job \r",
+											"let eptJob = pm.globals.get(\"rdJob\")\r",
+											"\r",
+											"let actId = jsonData.id \r",
+											"let actCeatAt = jsonData.createdAt\r",
+											"\r",
+											"pm.test(\"Name đúng\", function () {\r",
+											"    pm.expect(actName).to.eql(eptName);\r",
+											"});\r",
+											"pm.test(\"Job đúng\", function () {\r",
+											"    pm.expect(actJob).to.eql(eptJob);\r",
+											"});\r",
+											"pm.test(\"id và CreateAt\", function () {\r",
+											"    pm.expect(actId).not.to.eql(null);\r",
+											"    pm.expect(actCeatAt).not.to.eql(null);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "reqres-free-v1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"{{rdName}}\", // tên user - not required\r\n\"job\": \"{{rdJob}}\" // nghề nghiệp user - not required\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://reqres.in/api/users",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Bài 4 _ý 3",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json()\r",
+											"let actTime =jsonData.createdAt\r",
+											"let actCreatAt = new Date (actTime)\r",
+											"let curentTime = new Date()\r",
+											"\r",
+											"let actVietNamTime = actCreatAt.toLocaleString(\"vi-VN\", { timeZone: \"Asia/Ho_Chi_Minh\" });\r",
+											"let crVNTime= curentTime.toLocaleString(\"vi-VN\", { timeZone: \"Asia/Ho_Chi_Minh\" });\r",
+											"pm.test(\"Thời gian tạo đúng\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(actVietNamTime<= crVNTime).to.be.true;\r",
+											"});\r",
+											"console.log(actVietNamTime  + \"------ \"+ crVNTime)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "reqres-free-v1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"{{$randomFullName}}\", // tên user - not required\r\n\"job\": \"{{$randomJobTitle}}\" // nghề nghiệp user - not required\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://reqres.in/api/users",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
